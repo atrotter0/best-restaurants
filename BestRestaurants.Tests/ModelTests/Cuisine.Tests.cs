@@ -79,5 +79,15 @@ namespace BestRestaurants.Tests
             List<Cuisine> testList = new List<Cuisine>{ newCuisine2 };
             CollectionAssert.AreEqual(testList, result);
         }
+
+        [TestMethod]
+        public void Find_FindsCuisineInDatabaseById_Cuisine()
+        {
+            Cuisine newCuisine = new Cuisine("Korean BBQ");
+            newCuisine.Id = 1;
+            newCuisine.Save();
+            Cuisine foundCuisine = Cuisine.Find(newCuisine.Id);
+            Assert.AreEqual(newCuisine, foundCuisine);
+        }
     }
 }

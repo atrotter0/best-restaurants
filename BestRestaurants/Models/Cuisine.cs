@@ -10,9 +10,10 @@ namespace BestRestaurants.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public Cuisine (string name)
+        public Cuisine (string name, int id = 0)
         {
             Name = name;
+            Id = id;
         }
 
         public override bool Equals(System.Object otherCuisine)
@@ -73,7 +74,6 @@ namespace BestRestaurants.Models
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
             cmd.CommandText = @"INSERT INTO cuisines (name) VALUES (@RestaurantName);";
-            MySqlParameter name = new MySqlParameter();
             cmd.Parameters.AddWithValue("@RestaurantName", this.Name);
 
             cmd.ExecuteNonQuery();
@@ -93,9 +93,7 @@ namespace BestRestaurants.Models
             var cmd = conn.CreateCommand() as MySqlCommand;
             cmd.CommandText = @"UPDATE cuisines SET name = @CuisineName WHERE id = @CuisineId;";
 
-            MySqlParameter name = new MySqlParameter();
             cmd.Parameters.AddWithValue("@CuisineName", this.Name);
-            MySqlParameter id = new MySqlParameter();
             cmd.Parameters.AddWithValue("@CuisineId", this.Id);
 
             cmd.ExecuteNonQuery();
@@ -114,7 +112,6 @@ namespace BestRestaurants.Models
             var cmd = conn.CreateCommand() as MySqlCommand;
             cmd.CommandText = @"DELETE FROM cuisines WHERE id = @CuisineId;";
 
-            MySqlParameter id = new MySqlParameter();
             cmd.Parameters.AddWithValue("@CuisineId", this.Id);
 
             cmd.ExecuteNonQuery();
@@ -124,6 +121,35 @@ namespace BestRestaurants.Models
             {
                 conn.Dispose();
             }
+        }
+
+        public static Cuisine Find(int id)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT * FROM cuisines WHERE id = @searchId;";
+            cmd.Parameters.AddWithValue("@searchId", id);
+            var rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+            int cuisineId = 0;
+            string cuisineName = "";
+
+            while (rdr.Read())
+            {
+                cuisineId = rdr.GetInt32(0);
+                cuisineName = rdr.GetString(1);
+            }
+
+            Cuisine foundCuisine = new Cuisine(cuisineName, cuisineId);
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return foundCuisine;
         }
     }
 }
