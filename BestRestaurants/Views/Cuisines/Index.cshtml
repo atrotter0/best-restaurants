@@ -1,0 +1,30 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class='container'>
+    <h1>Cuisines</h1>
+    <div class='button-box'>
+        <a href='/cuisines/new' class='btn btn-lg btn-info'>
+            <span class='glyphicon glyphicon-plus' aria-hidden="true"></span>
+            Add Cuisine
+        </a>
+    </div>
+    @foreach (var cuisine in Model)
+    {
+        <div class='panel panel-default'>
+            <div class='panel-heading'>
+                <h2>@cuisine.Name</h2>
+            </div>
+            <div class='panel-body'>
+                // add restauarants here
+            </div>
+            <div class='button-box'>
+                <a href='/cuisines/@cuisine.Id' class='btn btn-md btn-warning'>Update</a>
+                <form action='/cuisines/@cuisine.Id/delete' method='post' id='delete-form'>
+                    <button class='btn btn-md btn-warning'>Delete</button>
+                </form>
+            </div>
+        </div>
+    }
+</div>

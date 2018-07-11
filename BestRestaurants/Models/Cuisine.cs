@@ -16,6 +16,11 @@ namespace BestRestaurants.Models
             Id = id;
         }
 
+        public Cuisine ()
+        {
+            
+        }
+
         public override bool Equals(System.Object otherCuisine)
         {
             if (!(otherCuisine is Cuisine))

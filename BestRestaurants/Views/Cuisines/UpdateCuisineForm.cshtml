@@ -1,0 +1,14 @@
+@{
+  Layout = "_Layout";
+}
+
+    <div class='container'>
+        <h1>Update Cuisine</h1>
+        <form action='/cuisines/@Model.Id/update' method='post'>
+            <div class='form-group'>
+                <label for='name'><h4>Type</h4></label>
+                <input type='text' name='name' class='form-control' value="@Model.Name" required>
+            </div>
+            <button type='submit' class='btn btn-lg btn-default'>Update Cuisine</button>
+        </form>
+    </div>
