@@ -29,5 +29,37 @@ namespace BestRestaurants.Models
                 return (nameEquality);
             }
         }
+
+        public static List<Cuisine> GetAll()
+        {
+            List<Cuisine> allCuisines = new List<Cuisine>() {};
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT * FROM cuisines;";
+            MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+            while(rdr.Read())
+            {
+                int cuisineId = rdr.GetInt32(0);
+                string cuisineName = rdr.GetString(1);
+                int cuisineRestaurantId = rdr.GetInt32(2);
+
+                Cuisine newCuisine = new Cuisine(cuisineName);
+                newCuisine.Id = cuisineId;
+                newCuisine.RestaurantId = cuisineRestaurantId;
+                allCuisines.Add(newCuisine);
+            }
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return allCuisines;
+        }
+
+        public static void Save()
+        {
+            
+        }
     }
 }

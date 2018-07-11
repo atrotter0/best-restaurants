@@ -6,8 +6,19 @@ using BestRestaurants.Models;
 namespace BestRestaurants.Tests
 {
     [TestClass]
-    public class CuisineTest
+    public class CuisineTest : IDisposable
     {
+
+        public void Dispose()
+        {
+            Cuisine.DeleteAll();
+        }
+
+        public CuisineTest()
+        {
+            DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=best_restaurants_test;";
+        }
+
         [TestMethod]
         public void GetSetProperties_GetsSetsProperties_True()
         {
@@ -22,6 +33,13 @@ namespace BestRestaurants.Tests
             Cuisine firstCuisine = new Cuisine("Italian");
             Cuisine secondCuisine = new Cuisine("Italian");
             Assert.AreEqual(firstCuisine, secondCuisine);
+        }
+
+        [TestMethod]
+        public void GetAll_DbStartsEmpty_0()
+        {
+            int result = Cuisine.GetAll().Count;
+            Assert.AreEqual(0, result);
         }
     }
 }
