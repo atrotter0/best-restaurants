@@ -18,7 +18,38 @@ namespace BestRestaurants.Models
 
         public Cuisine ()
         {
-            
+
+        }
+
+        public List<Restaurant> GetRestaurants()
+        {
+            List<Restaurant> allRestaurants = new List<Restaurant>() {};
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT * FROM restaurants WHERE cuisine_id = " + this.Id + ";";
+            MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+            while(rdr.Read())
+            {
+                int id = rdr.GetInt32(0);
+                string name = rdr.GetString(1);
+                string price = rdr.GetString(2);
+                int cuisineId = rdr.GetInt32(3);
+                int reviewId = rdr.GetInt32(4);
+
+                Restaurant newRestaurant = new Restaurant(name, price);
+                newRestaurant.Id = id;
+                newRestaurant.CuisineId = cuisineId;
+                newRestaurant.ReviewId = reviewId;
+                allRestaurants.Add(newRestaurant);
+            }
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return allRestaurants;
+
         }
 
         public override bool Equals(System.Object otherCuisine)

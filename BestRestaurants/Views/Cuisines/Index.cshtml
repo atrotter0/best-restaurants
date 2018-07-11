@@ -17,7 +17,10 @@
                 <h2>@cuisine.Name</h2>
             </div>
             <div class='panel-body'>
-                // add restauarants here
+                @foreach (var restaurant in @cuisine.GetRestaurants())
+                {
+                    <p><a href='/restaurants/@restaurant.Id'>@restaurant.Name</a></p>
+                }
             </div>
             <div class='button-box'>
                 <a href='/cuisines/@cuisine.Id' class='btn btn-md btn-warning'>Update</a>
