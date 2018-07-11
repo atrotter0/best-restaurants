@@ -15,5 +15,19 @@ namespace BestRestaurants.Models
         {
             Name = name;
         }
+
+        public override bool Equals(System.Object otherCuisine)
+        {
+            if (!(otherCuisine is Cuisine))
+            {
+                return false;
+            }
+            else
+            {
+                Cuisine newCuisine = (Cuisine) otherCuisine;
+                bool nameEquality = (this.Name == newCuisine.Name);
+                return (nameEquality);
+            }
+        }
     }
 }

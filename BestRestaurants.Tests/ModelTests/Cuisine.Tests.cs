@@ -15,5 +15,13 @@ namespace BestRestaurants.Tests
             newCuisine.Name = "Italian";
             Assert.AreEqual("Italian", newCuisine.Name);
         }
+
+        [TestMethod]
+        public void Equals_ReturnsTrueIfNamesAreTheSame_Cuisine()
+        {
+            Cuisine firstCuisine = new Cuisine("Italian");
+            Cuisine secondCuisine = new Cuisine("Italian");
+            Assert.AreEqual(firstCuisine, secondCuisine);
+        }
     }
 }
