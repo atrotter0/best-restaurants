@@ -35,5 +35,23 @@ namespace BestRestaurants.Controllers
             Restaurant newRestaurant = Restaurant.Find(id);
             return View(newRestaurant);
         }
+
+        [HttpGet("/restaurants/{id}/update")]
+        public ActionResult UpdateRestaurantForm(int id)
+        {
+            Restaurant newRestaurant = Restaurant.Find(id);
+            return View(newRestaurant);
+        }
+
+        [HttpPost("/restaurants/{id}/update")]
+        public ActionResult UpdateRestaurant(int id, string name, string price, int cuisineId)
+        {
+            Restaurant newRestaurant = Restaurant.Find(id);
+            newRestaurant.Name = name;
+            newRestaurant.Price = price;
+            newRestaurant.CuisineId = cuisineId;
+            newRestaurant.Update();
+            return RedirectToAction("ShowRestaurant");
+        }
     }
 }
