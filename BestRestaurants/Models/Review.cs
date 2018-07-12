@@ -64,6 +64,20 @@ namespace BestRestaurants.Models
             return allReviews;
         }
 
+        public static void DeleteAll()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"DELETE FROM reviews;";
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            if (conn != null)
+            {
+               conn.Dispose();
+            }
+        }
+
         public void Save()
         {
             MySqlConnection conn = DB.Connection();
@@ -102,6 +116,58 @@ namespace BestRestaurants.Models
             {
                 conn.Dispose();
             }
+        }
+
+        public void Delete()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"DELETE FROM reviews WHERE id = @Id;";
+            cmd.Parameters.AddWithValue("@Id", this.Id);
+            cmd.ExecuteNonQuery();
+
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
+
+        public static Review Find(int id)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT * FROM reviews WHERE id = @searchId;";
+            cmd.Parameters.AddWithValue("@searchId", id);
+            var rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+            int reviewId = 0;
+            string reviewerName = "";
+            string description = "";
+            int rating = 0;
+            int restaurantId = 0;
+
+            while (rdr.Read())
+            {
+                reviewId = rdr.GetInt32(0);
+                reviewerName = rdr.GetString(1);
+                description = rdr.GetString(2);
+                rating = rdr.GetInt32(3);
+                restaurantId = rdr.GetInt32(4);
+            }
+
+            Review foundReview = new Review(reviewerName, description, rating, reviewId, restaurantId);
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return foundReview;
         }
 
     }

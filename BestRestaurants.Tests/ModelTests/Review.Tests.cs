@@ -11,7 +11,7 @@ namespace BestRestaurants.Tests
 
         public void Dispose()
         {
-            // Review.DeleteAll();
+            Review.DeleteAll();
         }
 
         public ReviewTest()
@@ -70,7 +70,30 @@ namespace BestRestaurants.Tests
             CollectionAssert.AreEqual(testList, result);
         }
 
+        [TestMethod]
+        public void Delete_DeletesRecordFromDatabase_ReviewList()
+        {
+            Review newReview = new Review("Peter Jenkins", "Awful food", 1);
+            Review newReview2 = new Review("Franz Lina", "Great food", 5);
+            newReview.Id = 1;
+            newReview2.Id = 2;
+            newReview.Save();
+            newReview2.Save();
+            newReview2.Delete();
 
+            List<Review> ReviewResult = Review.GetAll();
+            List<Review> testList = new List<Review>{ newReview };
+            CollectionAssert.AreEqual(testList, ReviewResult);
+        }
 
+        [TestMethod]
+        public void Find_FindsReviewInDatabaseById_Review()
+        {
+            Review newReview = new Review("Peter Jenkins", "Awful food", 1);
+            newReview.Id = 1;
+            newReview.Save();
+            Review foundReview = Review.Find(newReview.Id);
+            Assert.AreEqual(newReview, foundReview);
+        }
     }
 }
