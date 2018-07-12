@@ -39,6 +39,30 @@ namespace BestRestaurants.Models
             }
         }
 
+        public List<Cuisine> GetCuisines()
+        {
+            List<Cuisine> allCuisines = new List<Cuisine>() {};
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT * FROM cuisines WHERE id = " + this.CuisineId + ";";
+            MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+            while(rdr.Read())
+            {
+                int cuisineId = rdr.GetInt32(0);
+                string cuisineName = rdr.GetString(1);
+                Cuisine newCuisine = new Cuisine(cuisineName);
+                newCuisine.Id = cuisineId;
+                allCuisines.Add(newCuisine);
+            }
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return allCuisines;
+        }
+
         public static List<Restaurant> GetAll()
         {
             List<Restaurant> allRestaurants = new List<Restaurant>() {};

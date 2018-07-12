@@ -6,7 +6,7 @@
 
 ## Description
 
-Add a description here
+A .NET web app that allows a user to add cuisines, and then associate their favorite restaurants with those cuisines and add personal ratings.
 
 ## Specs
 
@@ -34,6 +34,8 @@ Add a description here
 ## Technologies Used
 
 * .Net Core 1.1.4
+* Bootstrap 3.3.7
+* jQuery 3.3.1
 
 ## Links
 

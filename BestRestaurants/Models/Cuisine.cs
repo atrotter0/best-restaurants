@@ -49,7 +49,6 @@ namespace BestRestaurants.Models
                 conn.Dispose();
             }
             return allRestaurants;
-
         }
 
         public override bool Equals(System.Object otherCuisine)
@@ -111,7 +110,6 @@ namespace BestRestaurants.Models
             var cmd = conn.CreateCommand() as MySqlCommand;
             cmd.CommandText = @"INSERT INTO cuisines (name) VALUES (@RestaurantName);";
             cmd.Parameters.AddWithValue("@RestaurantName", this.Name);
-
             cmd.ExecuteNonQuery();
             this.Id = (int) cmd.LastInsertedId;
 
@@ -128,10 +126,8 @@ namespace BestRestaurants.Models
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
             cmd.CommandText = @"UPDATE cuisines SET name = @CuisineName WHERE id = @CuisineId;";
-
             cmd.Parameters.AddWithValue("@CuisineName", this.Name);
             cmd.Parameters.AddWithValue("@CuisineId", this.Id);
-
             cmd.ExecuteNonQuery();
 
             conn.Close();
@@ -147,9 +143,10 @@ namespace BestRestaurants.Models
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
             cmd.CommandText = @"DELETE FROM cuisines WHERE id = @CuisineId;";
-
             cmd.Parameters.AddWithValue("@CuisineId", this.Id);
+            cmd.ExecuteNonQuery();
 
+            cmd.CommandText = @"DELETE FROM restaurants WHERE cuisine_id = @CuisineId;";
             cmd.ExecuteNonQuery();
 
             conn.Close();

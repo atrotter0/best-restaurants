@@ -74,10 +74,17 @@ namespace BestRestaurants.Tests
             newCuisine2.Id = 2;
             newCuisine.Save();
             newCuisine2.Save();
+
+            Restaurant newRestaurant = new Restaurant("Jojo's", "$", 0, newCuisine.Id, 0);
+            newRestaurant.Save();
             newCuisine.Delete();
-            List<Cuisine> result = Cuisine.GetAll();
-            List<Cuisine> testList = new List<Cuisine>{ newCuisine2 };
-            CollectionAssert.AreEqual(testList, result);
+
+            List<Cuisine> cuisineResult = Cuisine.GetAll();
+            List<Cuisine> cuisineTest = new List<Cuisine>{ newCuisine2 };
+            List<Restaurant> restaurantResult = Restaurant.GetAll();
+            List<Restaurant> restaurantTest = new List<Restaurant>() {};
+            CollectionAssert.AreEqual(cuisineTest, cuisineResult);
+            CollectionAssert.AreEqual(restaurantTest, restaurantResult);
         }
 
         [TestMethod]

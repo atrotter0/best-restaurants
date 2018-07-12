@@ -28,5 +28,12 @@ namespace BestRestaurants.Controllers
             newRestaurant.Save();
             return RedirectToAction("Index");
         }
+
+        [HttpGet("/restaurants/{id}")]
+        public ActionResult ShowRestaurant(int id)
+        {
+            Restaurant newRestaurant = Restaurant.Find(id);
+            return View(newRestaurant);
+        }
     }
 }
