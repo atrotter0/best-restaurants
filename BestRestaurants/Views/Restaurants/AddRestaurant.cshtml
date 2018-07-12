@@ -11,7 +11,13 @@
             </div>
             <div class='form-group'>
                 <label for='price'><h4>Price</h4></label>
-                <input type='text' name='price' class='form-control' required>
+                <select name='price' class='form-control' required>
+                    <option name="" value="">Select A Cuisine</option>
+                    <option name="price" value="$">$ (Affordable)</option>
+                    <option name="price" value="$$">$$ (Moderate)</option>
+                    <option name="price" value="$$$">$$$ (Expensive)</option>
+                    <option name="price" value="$$$$">$$$$ (Very Expensive)</option>
+                </select>
             </div>
             <div class='form-group'>
                 <label for='cuisine'><h4>Cuisine</h4></label>

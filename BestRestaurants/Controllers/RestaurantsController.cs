@@ -53,5 +53,13 @@ namespace BestRestaurants.Controllers
             newRestaurant.Update();
             return RedirectToAction("ShowRestaurant");
         }
+
+        [HttpPost("/restaurants/{id}/delete")]
+        public ActionResult UpdateRestaurant(int id)
+        {
+            Restaurant newRestaurant = Restaurant.Find(id);
+            newRestaurant.Delete();
+            return RedirectToAction("Index");
+        }
     }
 }
