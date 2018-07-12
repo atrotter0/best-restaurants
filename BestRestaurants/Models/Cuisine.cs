@@ -35,12 +35,10 @@ namespace BestRestaurants.Models
                 string name = rdr.GetString(1);
                 string price = rdr.GetString(2);
                 int cuisineId = rdr.GetInt32(3);
-                int reviewId = rdr.GetInt32(4);
 
                 Restaurant newRestaurant = new Restaurant(name, price);
                 newRestaurant.Id = id;
                 newRestaurant.CuisineId = cuisineId;
-                newRestaurant.ReviewId = reviewId;
                 allRestaurants.Add(newRestaurant);
             }
             conn.Close();

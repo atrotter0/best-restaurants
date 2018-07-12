@@ -75,7 +75,7 @@ namespace BestRestaurants.Tests
             newCuisine.Save();
             newCuisine2.Save();
 
-            Restaurant newRestaurant = new Restaurant("Jojo's", "$", 0, newCuisine.Id, 0);
+            Restaurant newRestaurant = new Restaurant("Jojo's", "$", 0, newCuisine.Id);
             newRestaurant.Save();
             newCuisine.Delete();
 

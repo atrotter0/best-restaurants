@@ -11,15 +11,13 @@ namespace BestRestaurants.Models
         public string Name { get; set; }
         public string Price { get; set; }
         public int CuisineId { get; set; }
-        public int ReviewId { get; set; }
 
-        public Restaurant (string name, string price, int id = 0, int cuisineId = 0, int reviewId = 0)
+        public Restaurant (string name, string price, int id = 0, int cuisineId = 0)
         {
             Name = name;
             Price = price;
             Id = id;
             CuisineId = cuisineId;
-            ReviewId = reviewId;
         }
 
         public override bool Equals(System.Object otherRestaurant)
@@ -34,8 +32,7 @@ namespace BestRestaurants.Models
                 bool nameEquality = (this.Name == newRestaurant.Name);
                 bool priceEquality = (this.Price == newRestaurant.Price);
                 bool cuisineIdEquality = (this.CuisineId == newRestaurant.CuisineId);
-                bool reviewIdEquality = (this.ReviewId == newRestaurant.ReviewId);
-                return (nameEquality && priceEquality && cuisineIdEquality && reviewIdEquality);
+                return (nameEquality && priceEquality && cuisineIdEquality);
             }
         }
 
@@ -101,12 +98,10 @@ namespace BestRestaurants.Models
                 string name = rdr.GetString(1);
                 string price = rdr.GetString(2);
                 int cuisineId = rdr.GetInt32(3);
-                int reviewId = rdr.GetInt32(4);
 
                 Restaurant newRestaurant = new Restaurant(name, price);
                 newRestaurant.Id = id;
                 newRestaurant.CuisineId = cuisineId;
-                newRestaurant.ReviewId = reviewId;
                 allRestaurants.Add(newRestaurant);
             }
             conn.Close();
@@ -136,10 +131,9 @@ namespace BestRestaurants.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO restaurants (name, price, cuisine_id, review_id) VALUES (@RestaurantName, @RestaurantPrice, @RestaurantCuisineId, @RestaurantReviewId);";
+            cmd.CommandText = @"INSERT INTO restaurants (name, price, cuisine_id) VALUES (@RestaurantName, @RestaurantPrice, @RestaurantCuisineId);";
             cmd.Parameters.AddWithValue("@RestaurantName", this.Name);
             cmd.Parameters.AddWithValue("@RestaurantCuisineId", this.CuisineId);
-            cmd.Parameters.AddWithValue("@RestaurantReviewId", this.ReviewId);
             cmd.Parameters.AddWithValue("@RestaurantPrice", this.Price);
 
             cmd.ExecuteNonQuery();
@@ -205,7 +199,6 @@ namespace BestRestaurants.Models
             string name = "";
             string price = "";
             int cuisineId = 0;
-            int reviewId = 0;
 
             while (rdr.Read())
             {
@@ -213,10 +206,9 @@ namespace BestRestaurants.Models
                  name = rdr.GetString(1);
                  price = rdr.GetString(2);
                  cuisineId = rdr.GetInt32(3);
-                 reviewId = rdr.GetInt32(4);
             }
 
-            Restaurant foundRestaurant = new Restaurant(name, price, restaurantId, cuisineId, reviewId);
+            Restaurant foundRestaurant = new Restaurant(name, price, restaurantId, cuisineId);
 
             conn.Close();
             if (conn != null)

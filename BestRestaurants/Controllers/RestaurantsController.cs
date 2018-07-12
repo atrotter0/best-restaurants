@@ -24,7 +24,7 @@ namespace BestRestaurants.Controllers
         [HttpPost("/restaurants")]
         public ActionResult CreateRestaurant(string name, string price, int cuisineId)
         {
-            Restaurant newRestaurant = new Restaurant(name, price, 0, cuisineId, 0);
+            Restaurant newRestaurant = new Restaurant(name, price, 0, cuisineId);
             newRestaurant.Save();
             return RedirectToAction("Index");
         }
