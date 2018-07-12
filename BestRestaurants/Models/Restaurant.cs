@@ -175,7 +175,9 @@ namespace BestRestaurants.Models
             cmd.CommandText = @"DELETE FROM restaurants WHERE id = @RestaurantId;";
 
             cmd.Parameters.AddWithValue("@RestaurantId", this.Id);
+            cmd.ExecuteNonQuery();
 
+            cmd.CommandText = @"DELETE FROM reviews WHERE restaurant_id = @RestaurantId;";
             cmd.ExecuteNonQuery();
 
             conn.Close();

@@ -94,6 +94,10 @@ namespace BestRestaurants.Models
             var cmd = conn.CreateCommand() as MySqlCommand;
             cmd.CommandText = @"DELETE FROM cuisines;";
             cmd.ExecuteNonQuery();
+
+            cmd.CommandText = @"DELETE FROM restaurants;";
+            cmd.ExecuteNonQuery();
+
             conn.Close();
             if (conn != null)
             {
@@ -146,6 +150,9 @@ namespace BestRestaurants.Models
 
             cmd.CommandText = @"DELETE FROM restaurants WHERE cuisine_id = @CuisineId;";
             cmd.ExecuteNonQuery();
+
+            // cmd.CommandText = @"DELETE FROM reviews WHERE review_id = @";
+            // cmd.ExecuteNonQuery();
 
             conn.Close();
             if (conn != null)

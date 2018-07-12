@@ -1,0 +1,39 @@
+@{
+  Layout = "_Layout";
+}
+
+    <div class='container'>
+        <h1>Update Review</h1>
+        <form action='/reviews/@Model.Id/update' method='post'>
+            <div class='form-group'>
+                <label for='reviewerName'><h4>Reviewer Name</h4></label>
+                <input type='text' name='reviewerName' class='form-control' value='@Model.ReviewerName' required>
+            </div>
+            <div class='form-group'>
+                <label for='description'><h4>Review</h4></label>
+                <textarea name='description' class='form-control' cols='8' rows='8' required>@Model.Description</textarea>
+            </div>
+            <div class='form-group'>
+                <label for='rating'><h4>Rating</h4></label>
+                <select name='rating' class='form-control' value='@Model.Rating' required>
+                    <option name="" value="">Select A Rating</option>
+                    <option name="rating" value="1">One Star</option>
+                    <option name="rating" value="2">Two Stars</option>
+                    <option name="rating" value="3">Three Stars</option>
+                    <option name="rating" value="4">Four Stars</option>
+                    <option name="rating" value="5">Five Stars</option>
+                </select>
+            </div>
+            <div class='form-group'>
+                <label for='restaurantId'><h4>Restaurant</h4></label>
+                <select name='restaurantId' class='form-control' required>
+                    <option name="" value="">Select A Restaurant</option>
+                    @foreach (var restaurant in Model.GetRestaurants())
+                    {
+                        <option name="restaurantId" value="@restaurant.Id">@restaurant.Name</option>
+                    }
+                </select>
+            </div>
+            <button type='submit' class='btn btn-lg btn-default'>Update Review</button>
+        </form>
+    </div>

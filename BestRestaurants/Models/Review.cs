@@ -170,5 +170,34 @@ namespace BestRestaurants.Models
             return foundReview;
         }
 
+        public Restaurant GetRestaurant()
+        {
+            Restaurant newRestaurant = new Restaurant("",  "");
+
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT * FROM restaurants WHERE id = " + this.RestaurantId + ";";
+            MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+            while(rdr.Read())
+            {
+                int id = rdr.GetInt32(0);
+                string name = rdr.GetString(1);
+                string price = rdr.GetString(2);
+                int cuisineId = rdr.GetInt32(3);
+
+                newRestaurant.Name = name;
+                newRestaurant.Price = price;
+                newRestaurant.Id = id;
+                newRestaurant.CuisineId = cuisineId;
+            }
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return newRestaurant;
+        }
+
     }
 }
