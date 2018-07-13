@@ -12,11 +12,14 @@ A .NET web app that allows a user to add cuisines, and then associate their favo
 
 * Download and install .Net Core 1.1.4
 * Download and install Mono
+* Download and install MAMP 4.5
 * Clone the repo
+* Open MAMP and start the Apache and MySql servers
+* Navigate to MAMP > Tools > phpMyAdmin and import the `best_restaurants.sql` file to create the database
 * Run `dotnet restore` from project directory and test directory to install packages
 * Run `dotnet build` from project directory and fix any build errors
 * Run `dotnet test` from the test directory to run the testing suite
-* Run `dotnet run` to start the server
+* Run `dotnet watch run` to start the server with the dotnet watch tool
 
 ## Contribution Requirements
 
