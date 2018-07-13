@@ -8,12 +8,6 @@
 
 A .NET web app that allows a user to add cuisines, and then associate their favorite restaurants with those cuisines and add personal ratings.
 
-## Specs
-
-| Behavior | Input | Output |
-|----------|-------|--------|
-| Behavior | input | output |
-
 ## Setup on OSX
 
 * Download and install .Net Core 1.1.4
@@ -34,12 +28,9 @@ A .NET web app that allows a user to add cuisines, and then associate their favo
 ## Technologies Used
 
 * .Net Core 1.1.4
+* MySQL
 * Bootstrap 3.3.7
 * jQuery 3.3.1
-
-## Links
-
-* Add links here
 
 ## License
 
