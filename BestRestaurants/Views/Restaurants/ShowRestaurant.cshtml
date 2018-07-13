@@ -6,16 +6,16 @@
     <div class='panel panel-default'>
         <div class='panel-heading'>
             <h2>@Model.Name</h2>
+            <div class='panel-button-box'>
+            <a href='/restaurants/@Model.Id/update' class='btn btn-md btn-success'>Update</a>
+            <form action='/restaurants/@Model.Id/delete' method='post' id='delete-form'>
+                <button class='btn btn-md btn-danger'>Delete</button>
+            </form>
+        </div>
         </div>
         <div class='panel-body'>
             <p>Cuisine: @Model.GetCuisines()[0].Name</p>
             <p>Price: @Model.Price</p>
-        </div>
-        <div class='button-box'>
-            <a href='/restaurants/@Model.Id/update' class='btn btn-md btn-warning'>Update</a>
-            <form action='/restaurants/@Model.Id/delete' method='post' id='delete-form'>
-                <button class='btn btn-md btn-warning'>Delete</button>
-            </form>
         </div>
     </div>
 </div>

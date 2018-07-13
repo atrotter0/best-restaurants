@@ -4,7 +4,7 @@
 
 <div class='container'>
     <h1>Cuisines</h1>
-    <div class='button-box'>
+    <div class='top-button-box'>
         <a href='/cuisines/new' class='btn btn-lg btn-info'>
             <span class='glyphicon glyphicon-plus' aria-hidden="true"></span>
             Add Cuisine
@@ -15,18 +15,25 @@
         <div class='panel panel-default'>
             <div class='panel-heading'>
                 <h2>@cuisine.Name</h2>
+                <div class='panel-button-box'>
+                    <a href='/cuisines/@cuisine.Id' class='btn btn-md btn-success'>Update</a>
+                    <form action='/cuisines/@cuisine.Id/delete' method='post' id='delete-form'>
+                        <button class='btn btn-md btn-danger'>Delete</button>
+                    </form>
+                </div>
             </div>
             <div class='panel-body'>
-                @foreach (var restaurant in @cuisine.GetRestaurants())
+                @if (cuisine.GetRestaurants().Count == 0)
                 {
-                    <p><a href='/restaurants/@restaurant.Id'>@restaurant.Name</a></p>
+                    <h5>No restaurants listed for this cuisine.</h5>
                 }
-            </div>
-            <div class='button-box'>
-                <a href='/cuisines/@cuisine.Id' class='btn btn-md btn-warning'>Update</a>
-                <form action='/cuisines/@cuisine.Id/delete' method='post' id='delete-form'>
-                    <button class='btn btn-md btn-warning'>Delete</button>
-                </form>
+                else
+                {
+                    @foreach (var restaurant in @cuisine.GetRestaurants())
+                    {
+                        <p><a href='/restaurants/@restaurant.Id'>@restaurant.Name</a></p>
+                    }
+                }
             </div>
         </div>
     }

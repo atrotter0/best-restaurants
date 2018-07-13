@@ -1,7 +1,12 @@
-.button-box {
-    margin: 30px 0px 30px 10px;
+.top-button-box {
+  margin: 30px 0px 30px 10px;
+}
+
+.panel-button-box {
+  float: right;
+  margin-top: -40px;
 }
 
 #delete-form {
-    display: inline-block;
+  display: inline-block;
 }

@@ -27,11 +27,8 @@
             <div class='form-group'>
                 <label for='restaurantId'><h4>Restaurant</h4></label>
                 <select name='restaurantId' class='form-control' required>
-                    <option name="" value="">Select A Restaurant</option>
-                    @foreach (var restaurant in Model.GetRestaurants())
-                    {
-                        <option name="restaurantId" value="@restaurant.Id">@restaurant.Name</option>
-                    }
+                    <option name="" value="">Select a Restaurant</option>
+                    <option name="restaurantId" value="Model.GetRestaurant().Id" selected>@Model.GetRestaurant().Name</option>
                 </select>
             </div>
             <button type='submit' class='btn btn-lg btn-default'>Update Review</button>

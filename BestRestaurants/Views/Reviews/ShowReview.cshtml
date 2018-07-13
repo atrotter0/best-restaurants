@@ -6,17 +6,17 @@
     <div class='panel panel-default'>
         <div class='panel-heading'>
             <h2>@Model.ReviewerName</h2>
+            <div class='panel-button-box'>
+            <a href='/reviews/@Model.Id/update' class='btn btn-md btn-success'>Update</a>
+            <form action='/reviews/@Model.Id/delete' method='post' id='delete-form'>
+                <button class='btn btn-md btn-danger'>Delete</button>
+            </form>
+        </div>
         </div>
         <div class='panel-body'>
-            <p>Restaurant: @Model.GetRestaurants()[0].Name</p>
+            <p>Restaurant: @Model.GetRestaurant().Name</p>
             <p>Rating: @Model.Rating</p>
             <p>Review: @Model.Description</p>
-        </div>
-        <div class='button-box'>
-            <a href='/reviews/@Model.Id/update' class='btn btn-md btn-warning'>Update</a>
-            <form action='/reviews/@Model.Id/delete' method='post' id='delete-form'>
-                <button class='btn btn-md btn-warning'>Delete</button>
-            </form>
         </div>
     </div>
 </div>
